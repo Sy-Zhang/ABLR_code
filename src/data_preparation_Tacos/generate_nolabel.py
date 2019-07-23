@@ -4,7 +4,7 @@ import json
 import pdb
 import numpy as np
 
-video_path = '/Tacos/videos'
+video_path = '/data/home2/hacker01/MSM/Data/TACoS/videos'
 output_path = '../../data/Tacos/middle-labels/'
 
 seg_num = 256
@@ -35,8 +35,8 @@ def get_total_frame_number(fn):
     if not cap.isOpened():
         print "could not open :",fn
         sys.exit() 
-    length = float(cap.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT))
-    fps = cap.get(cv2.cv.CV_CAP_PROP_FPS)
+    length = float(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    fps = cap.get(cv2.CAP_PROP_FPS)
     length = length - 16
     return length,fps
 
@@ -84,7 +84,7 @@ def get_label_list(fname):
     fname = fname.split('/')[-1].split('.')[0]
     outfile = output_path+str(fname)+'.json'
     if not os.path.isfile(outfile):
-    	json.dump([frame_list, label_list], open(outfile,"w"))
+        json.dump([frame_list, label_list], open(outfile,"w"))
 
 if __name__=='__main__':
     b = getlist(video_path)

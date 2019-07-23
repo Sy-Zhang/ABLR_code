@@ -47,8 +47,8 @@ def generate_caption_json(datasplit):
 
     split_path = '../../data/Tacos/pre/tacos_split.npz'
     output_json = '../../data/Tacos/pre/'+datasplit+'.json'
-    video_dir_path = '/Tacos/videos/'
-    video_sentence_index_path = '/Tacos/index/'
+    video_dir_path = '/data/home2/hacker01/MSM/Data/TACoS/videos/'
+    video_sentence_index_path = '/data/home2/hacker01/MSM/Data/TACoS/index/'
 
     split_dict = np.load(split_path)
     video_list = split_dict[datasplit]
@@ -60,7 +60,8 @@ def generate_caption_json(datasplit):
         video_path = video_dir_path + video
         frame_num,fps = get_total_frame_number(video_path)
         print fps
-        video_dict['duration'] = frame_num
+        video_dict['fps'] = fps
+        video_dict['num_frames'] = frame_num
         file = open(video_sentence_index_path+video.split('.')[0]+'.sentences.tsv','r')
         lines = file.readlines()
 
